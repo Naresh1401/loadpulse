@@ -1,0 +1,48 @@
+{
+  "name": "loadpulse",
+  "version": "1.0.0",
+  "description": "A lightweight reverse-proxy load balancer and CLI performance/load testing tool for deployed services.",
+  "type": "module",
+  "main": "dist/load-balancer/index.js",
+  "types": "dist/load-balancer/index.d.ts",
+  "exports": {
+    ".": "./dist/load-balancer/index.js",
+    "./bench": "./dist/bench/index.js"
+  },
+  "bin": {
+    "loadpulse-lb": "dist/cli/lb.js",
+    "loadpulse-bench": "dist/cli/bench.js"
+  },
+  "files": [
+    "dist",
+    "config"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev:lb": "tsx src/cli/lb.ts",
+    "dev:bench": "tsx src/cli/bench.ts",
+    "lb": "node dist/cli/lb.js",
+    "bench": "node dist/cli/bench.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "load-balancer",
+    "reverse-proxy",
+    "performance-testing",
+    "load-testing",
+    "benchmark",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

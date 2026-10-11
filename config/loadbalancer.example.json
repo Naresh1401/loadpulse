@@ -1,0 +1,12 @@
+{
+  "port": 8080,
+  "strategy": "round-robin",
+  "healthCheckIntervalMs": 10000,
+  "healthCheckTimeoutMs": 2000,
+  "requestTimeoutMs": 10000,
+  "backends": [
+    { "url": "http://localhost:4001", "healthPath": "/health" },
+    { "url": "http://localhost:4002", "healthPath": "/health" },
+    { "url": "http://localhost:4003", "healthPath": "/health" }
+  ]
+}
