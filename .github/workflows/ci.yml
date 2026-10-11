@@ -4,20 +4,27 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+  workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Shared checks from https://github.com/Naresh1401/github-cicd-workflows
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  node:
+    name: Node
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [20.x, 22.x]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+        node-version: ['20', '22']
+    uses: Naresh1401/github-cicd-workflows/.github/workflows/node-ci.yml@v1
+    with:
+      node-version: ${{ matrix.node-version }}
+
+  repo-lint:
+    name: Repository lint
+    uses: Naresh1401/github-cicd-workflows/.github/workflows/repo-lint.yml@v1
